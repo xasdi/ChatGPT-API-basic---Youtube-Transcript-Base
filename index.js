@@ -3,7 +3,40 @@ const sendQuestionButton = document.getElementById("sendQuestion");
 const youtubeLinkInput = document.getElementById("youtubeLink");
 const sendLinkButton = document.getElementById("sendLink");
 const responseText = document.getElementById("response");
-const transcriptionText = document.getElementById("transcription");
+const transcriptionText = document.getElementById("transcriptionpreview");
+const dialog = document.getElementById("entercontextsource");
+
+var linkfocus = false;
+var questionfocus = false;
+
+function createnewchat(){
+  dialog.showModal();
+}
+
+function cancelcreation(){
+  dialog.close();
+}
+
+youtubeLinkInput.addEventListener("focus", () => {
+  linkfocus = true;
+  questionfocus = false;
+})
+
+questionInput.addEventListener("focus", () => {
+  linkfocus = false;
+  questionfocus = true;
+})
+
+document.addEventListener("keydown", (event) => {
+  if(event.key === "Enter"){
+    if(linkfocus){
+      alert("przesłano link");
+    }
+    if(questionfocus){
+      alert("przesłano zapytanie");
+    }
+  }
+})
 
 sendQuestionButton.addEventListener("click", async () => {
   const user_input = questionInput.value;
@@ -35,6 +68,6 @@ sendLinkButton.addEventListener("click", async () => {
   });
 
   const responseData = await response.json();
-  transcriptionText.innerHTML = responseData.transcription;
+  transcriptionText.value = responseData.transcription;
  
 });
