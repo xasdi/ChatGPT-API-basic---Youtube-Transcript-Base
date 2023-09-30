@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const { Configuration, OpenAIApi } = require("openai");
+const history = [];
 require("dotenv").config();
 
 // Dodaj parser ciała żądania dla POST requestów
@@ -40,8 +41,10 @@ app.post("/server/transcribe", async (req, res) => {
 
   const transcription = pythonData.transcription;
 
+  
+
   // Zwróć transkrypcję jako odpowiedź
-  res.json({ transcription: transcription });
+  response.json({ transcription: transcription });
 });
 
 // Endpoint obsługujący żądanie POST dla ścieżki "/api/chat"
@@ -52,15 +55,10 @@ app.post("/api/chat", async (req, res) => {
   const openai = new OpenAIApi(configuration);
 
   const user_input = req.body.message;
-  const history = req.body.history;
-  
-  
   
 
-  
-  
  
-
+  
   const messages = [];
   for (const [input_text, completion_text] of history) {
     messages.push({ role: "user", content: input_text });

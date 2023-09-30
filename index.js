@@ -8,9 +8,18 @@ const dialog = document.getElementById("entercontextsource");
 
 var linkfocus = false;
 var questionfocus = false;
+var messageHistory = [];
+
+function makenewchat(){
+  dialog.showModal();
+}
 
 function createnewchat(){
-  dialog.showModal();
+
+}
+
+function confirmcreation(){
+// do zrobienia
 }
 
 function cancelcreation(){
@@ -40,17 +49,20 @@ document.addEventListener("keydown", (event) => {
 
 sendQuestionButton.addEventListener("click", async () => {
   const user_input = questionInput.value;
-  const contexttxt = transcriptionText.innerHTML;
+  
+  
   const response = await fetch("/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message: user_input, history: []}),
+    body: JSON.stringify({ message: user_input}),
   });
 
   const responseData = await response.json();
   responseText.innerHTML = responseData.response;
+  
+  
   questionInput.value = null;
 });
 
