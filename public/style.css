@@ -41,12 +41,22 @@ body,html{
     align-items: center;
 }
 
+.message{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
 .usermessage{
-    background-color: #B6C8A9;
+    background-color: #343541;
+    
 }
 
 .aimessage{
-    background-color: #C8EAD3;
+    background-color: #444654;
+    
 }
 
 #entercontextsource{

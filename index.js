@@ -5,13 +5,20 @@ const sendLinkButton = document.getElementById("sendLink");
 const responseText = document.getElementById("response");
 const transcriptionText = document.getElementById("transcriptionpreview");
 const dialog = document.getElementById("entercontextsource");
+const messagesbox = document.getElementById("messages");
 
 var linkfocus = false;
 var questionfocus = false;
-var messageHistory = [];
+
+
+
 
 function makenewchat(){
   dialog.showModal();
+}
+
+function resetcontext(){
+  history = [];
 }
 
 function createnewchat(){
@@ -19,7 +26,7 @@ function createnewchat(){
 }
 
 function confirmcreation(){
-// do zrobienia
+  dialog.close();
 }
 
 function cancelcreation(){
@@ -50,6 +57,13 @@ document.addEventListener("keydown", (event) => {
 sendQuestionButton.addEventListener("click", async () => {
   const user_input = questionInput.value;
   
+  var newusermessagebox = document.createElement("div");
+  var usermessagecontent = document.createElement("div");
+  newusermessagebox.classList.add("message", "usermessage");
+  usermessagecontent.innerHTML = user_input;
+
+  messagesbox.appendChild(newusermessagebox);
+  newusermessagebox.appendChild(usermessagecontent);
   
   const response = await fetch("/api/chat", {
     method: "POST",
@@ -60,7 +74,17 @@ sendQuestionButton.addEventListener("click", async () => {
   });
 
   const responseData = await response.json();
-  responseText.innerHTML = responseData.response;
+
+  var newaimessagebox = document.createElement("div");
+  var aimessagecontent = document.createElement("div");
+  newaimessagebox.classList.add("message", "aimessage");
+  aimessagecontent.innerHTML = responseData.response;
+  
+  messagesbox.appendChild(newaimessagebox);
+  newaimessagebox.appendChild(aimessagecontent);
+
+
+  
   
   
   questionInput.value = null;

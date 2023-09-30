@@ -20,6 +20,8 @@ app.get("/index.js", (req, res) => {
   res.sendFile(path.join(__dirname, "index.js"));
 });
 
+
+
 app.post("/server/transcribe", async (req, res) => {
   const youtube_url = req.body.url;
   console.log("req body wartosc",req.body)
@@ -37,14 +39,16 @@ app.post("/server/transcribe", async (req, res) => {
 
   const pythonData = await pythonResponse.json();
 
-  console.log("Odpowiedź z serwera Pythona:", pythonData);
+  
 
   const transcription = pythonData.transcription;
 
+  const subhistory = [transcription + "napisz ok jak otrzymałeś transkrypcje", 'dobra'];
+  history.push(subhistory);
   
-
+  console.log("podano kontekst" + history)
   // Zwróć transkrypcję jako odpowiedź
-  response.json({ transcription: transcription });
+  res.json({ transcription: transcription });
 });
 
 // Endpoint obsługujący żądanie POST dla ścieżki "/api/chat"
@@ -56,7 +60,7 @@ app.post("/api/chat", async (req, res) => {
 
   const user_input = req.body.message;
   
-
+  console.log(history);
  
   
   const messages = [];
@@ -77,6 +81,7 @@ app.post("/api/chat", async (req, res) => {
     res.json({ response: completion_text });
 
     history.push([user_input, completion_text]);
+    
   } catch (error) {
     console.log("Wystąpił błąd:");
     console.log(error.message);
@@ -86,6 +91,6 @@ app.post("/api/chat", async (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Serwer uruchomiony na porcie ${PORT}`);
+  console.log(`Serwer uruchomiony na porcie ${PORT}`, history);
 });
 
