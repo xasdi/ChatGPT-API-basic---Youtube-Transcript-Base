@@ -27,6 +27,15 @@ function createnewchat(){
 
 function confirmcreation(){
   dialog.close();
+  var systemmessagebox = document.createElement("div");
+  var systemmessagecontent = document.createElement("div");
+  systemmessagebox.classList.add("message", "usermessage");
+  systemmessagecontent.innerHTML = "Transcription recieved by AI, ask all you want!";
+
+  systemmessagebox.appendChild(systemmessagecontent);
+  messagesbox.appendChild(systemmessagebox);
+  document.getElementById("questioninput").style.display = "flex";
+  
 }
 
 function cancelcreation(){
@@ -80,8 +89,9 @@ sendQuestionButton.addEventListener("click", async () => {
   newaimessagebox.classList.add("message", "aimessage");
   aimessagecontent.innerHTML = responseData.response;
   
-  messagesbox.appendChild(newaimessagebox);
   newaimessagebox.appendChild(aimessagecontent);
+  messagesbox.appendChild(newaimessagebox);
+  
 
 
   

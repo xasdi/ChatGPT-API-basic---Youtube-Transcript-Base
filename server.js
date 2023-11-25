@@ -43,12 +43,12 @@ app.post("/server/transcribe", async (req, res) => {
 
   const transcription = pythonData.transcription;
 
-  const subhistory = [transcription + "napisz ok jak otrzymałeś transkrypcje", 'dobra'];
+  const subhistory = [transcription + " to transkrypcja filmu, odpowiedz na pytania które ci zadam na jej podstawie", ''];
   history.push(subhistory);
   
   console.log("podano kontekst" + history)
   // Zwróć transkrypcję jako odpowiedź
-  res.json({ transcription: transcription });
+  res.json({ transcription: transcription, done: "taskended" });
 });
 
 // Endpoint obsługujący żądanie POST dla ścieżki "/api/chat"
