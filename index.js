@@ -7,6 +7,7 @@ const transcriptionText = document.getElementById("transcriptionpreview");
 const dialog = document.getElementById("entercontextsource");
 const messagesbox = document.getElementById("messages");
 
+
 var linkfocus = false;
 var questionfocus = false;
 
@@ -117,3 +118,36 @@ sendLinkButton.addEventListener("click", async () => {
   transcriptionText.value = responseData.transcription;
  
 });
+
+async function sendNewAccData(){
+  let password = document.getElementById("password");
+  let cpassword = document.getElementById("cpassword");
+  let email = document.getElementById("emailinput");
+  let username = document.getElementById("usernameinput");
+  
+  let newaccdataarray = [username.value, password.value, email.value]
+
+  if(password.value === cpassword.value){
+
+    alert("Wszystko jest ok!");
+    const response = await fetch("http://127.0.0.1:5000/dbcreate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ accdata: newaccdataarray }),
+    }); 
+    const responsemessage = await response.json();
+    alert("przeslano info" + responsemessage.amabatukam);
+
+  }else{
+    alert("Hasła się różnią!");
+    password.value = "";
+    cpassword.value = "";
+  }
+  
+  
+
+
+
+}
