@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta value="Wykonał Jakub Dąbrowski">
+  <title>AVI</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+  <div id="maincontainer">
+    <div id="sidebar">
+      <div id="createbox">
+        <div id="createnewchat" onclick="makenewchat()">New chat</div>
+        <dialog id="entercontextsource">
+          <label for="youtubeLink">YouTube Link:</label>
+            <input  id="youtubeLink" />
+            <button id="sendLink">Send</button> <br>
+          Transcription preview: <br>
+
+          <textarea readonly id="transcriptionpreview" placeholder="It's empty here...">
+
+          </textarea><br>
+          <button onclick="cancelcreation()">Cancel</button>
+          <button onclick="confirmcreation()">Confirm</button>
+        </dialog>
+      </div>
+      <div id="chathistory">
+
+      </div>
+      <div id="loginredirect" onclick="location.href = 'login.html'">
+          Login
+      </div>
+    </div>
+    <div id="mainchatbox">
+      <div id="modelselect">
+        <h1>Artificial Video Interpreter</h1>
+        <select>
+          <option>GPT3.5</option>
+          <option>GPT4</option>
+        </select>
+        <button onclick="resetcontext()">reset kontekst</button>
+        
+      </div>
+      <div id="messages">
+      </div>  
+      <div id="questioninput">
+        <input type="text" id="question" />
+        <button id="sendQuestion">Send</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  
+  
+  
+  <div>
+    <p id="response"></p>
+    <p id="transcription"></p>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

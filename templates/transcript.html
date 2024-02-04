@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YouTube Transcript Generator</title>
+  </head>
+  <body>
+    <h1>Transcript</h1>
+    <table>
+      {% for line in transcript %}
+      <tr>
+        <td>{{ line['timestamp'] }}</td>
+        <td>{{ line['text'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
